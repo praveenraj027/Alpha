@@ -12,7 +12,7 @@ export default function EmiCalculatorPage() {
                     <EmiCalculator />
                     <div className="text-black font-bold text-center mt-6 px-4 py-3 rounded-xl bg-white/50">
                         <p>
-                            If you're getting confused, consider checking what amount of car will be good for you according to your income.
+                            If you&rsquo;re getting confused, consider checking what amount of car will be good for you according to your income.
                         </p>
                     </div>
                 </div>
