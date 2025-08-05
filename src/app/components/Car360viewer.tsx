@@ -52,7 +52,7 @@ const Car360Viewer = () => {
     const imageSrc = `/images/car360/car${currentFrame}.jpg`;
     return (
         <>
-            <div className='w-full max-w-[800px] mx-auto cursor-grab select-none'
+            <div className='w-full max-w-3xl mx-auto my-8 rounded-xl shadow-lg overflow-hidden bg-white'
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 onMouseMove={handleMouseMove}
@@ -62,7 +62,7 @@ const Car360Viewer = () => {
                 onTouchMove={handleTouchMove}
             >
                 <img src={imageSrc} alt={`Car frame ${currentFrame}`}
-                    className='w-full h-auto'
+                    className='object-contain w-full h-auto transition-all duration-200'
                     draggable={false} />
             </div>
         </>
