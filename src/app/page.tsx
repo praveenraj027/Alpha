@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Carousel from './components/Carousel';
 import Car360Viewer from './components/Car360viewer';
 import CarDetails from './components/Cardetails';
-import Link from 'next/link';
 import Navbar from './components/Navbar';
 
 const carouselImages = [

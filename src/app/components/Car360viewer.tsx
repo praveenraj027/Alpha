@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 
 const totalFrames = 8;
 const Car360Viewer = () => {
@@ -14,7 +15,7 @@ const Car360Viewer = () => {
     const handleMouseUp = () => {
         isDragging.current = false;
     }
-    const handleMouseLeave = () =>{
+    const handleMouseLeave = () => {
         isDragging.current = false;
     }
     const handleMouseMove = (e: React.MouseEvent) => {
@@ -61,9 +62,15 @@ const Car360Viewer = () => {
                 onTouchEnd={handleTouchEnd}
                 onTouchMove={handleTouchMove}
             >
-                <img src={imageSrc} alt={`Car frame ${currentFrame}`}
-                    className='object-contain w-full h-auto transition-all duration-200'
-                    draggable={false} />
+                <div className="relative w-full h-[450px]">
+                    <Image
+                        src={imageSrc}
+                        alt={`Car frame ${currentFrame}`}
+                        fill
+                        className="object-contain transition-all duration-200"
+                        draggable={false}
+                    />
+                </div>
             </div>
         </>
     )
