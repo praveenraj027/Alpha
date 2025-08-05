@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Thumbs } from 'swiper/modules';
 import 'swiper/css';
 import type { Swiper as SwiperClass } from 'swiper';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/thumbs'
+import 'swiper/css/thumbs';
 import Image from 'next/image';
 
 interface CarouselProps {
@@ -16,8 +16,20 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+    const [thumbSlides, setThumbSlides] = useState(4); // default for desktop
+
+    useEffect(() => {
+        const handleResize = () => {
+            setThumbSlides(window.innerWidth < 640 ? 2 : 4);
+        };
+        handleResize(); // Set on first render
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <div className="w-full max-w-8xl mx-auto px-4 bg-transparent rounded-lg">
+            {/* Main Carousel */}
             <Swiper
                 modules={[Navigation, Pagination, Thumbs]}
                 spaceBetween={20}
@@ -26,7 +38,6 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                 pagination={{ clickable: true }}
                 loop
                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-                className=""
             >
                 {images.map((src, index) => (
                     <SwiperSlide key={index}>
@@ -42,26 +53,29 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                     </SwiperSlide>
                 ))}
             </Swiper>
+
+            {/* Thumbnails */}
             <Swiper
                 modules={[Thumbs]}
                 onSwiper={setThumbsSwiper}
                 spaceBetween={10}
-                slidesPerView={4}
+                slidesPerView={thumbSlides}
                 watchSlidesProgress
-                watchOverflow={true}
-                grabCursor={true}
-                slideToClickedSlide={true}
-                className='rounded-xl'
+                watchOverflow
+                grabCursor
+                slideToClickedSlide
+                className="rounded-xl mt-4"
             >
                 {images.map((src, index) => (
                     <SwiperSlide key={index}>
-                        <div className='p-1 mx-2 my-3 rounded-md hover:border-black transition-all duration-200 cursor-pointer'>
+                        <div className="p-1 mx-2 my-3 rounded-md hover:border-black transition-all duration-200 cursor-pointer">
                             <Image
                                 src={src}
                                 alt={`Thumbnail ${index + 1}`}
                                 width={120}
                                 height={50}
-                                className='object-contain w-full h-[100px]' />
+                                className="object-contain w-full h-[100px]"
+                            />
                         </div>
                     </SwiperSlide>
                 ))}

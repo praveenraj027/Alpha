@@ -24,7 +24,7 @@ const CarDetails: React.FC<CarDetailsProps> = ({
   transmission,
 }) => {
   return (
-    <div className="bg-white/60 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out mx-auto mt-12 h-[500px] overflow-y-auto">
+    <div className="bg-white/60 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out mx-auto mt-12 min-h-[500px] overflow-y-auto">
       <h2 className="text-2xl font-bold text-gray-800 mb-1">{carName}</h2>
       <p className="text-gray-500 text-sm mb-4">{variant}</p>
 
@@ -64,9 +64,10 @@ const CarDetails: React.FC<CarDetailsProps> = ({
       <p className='py-2'>Or</p>
       <p>start your EMI with ₹25214/month </p>
       <div>
-        <button className='bg-purple-950 w-full py-3 text-white text-xl font-bold mt-6 rounded-xl'>
+        <a href="/calculator"><button className='bg-purple-950 w-full py-3 text-white text-xl font-bold mt-6 rounded-xl cursor-pointer'>
           Calculate your EMI
         </button>
+        </a>
       </div>
     </div>
 
